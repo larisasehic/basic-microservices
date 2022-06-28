@@ -1,0 +1,39 @@
+version: '3.6'
+
+services:
+  back:
+    build: ./back
+    image: 'spring-boot-app'
+    container_name: 'spring-boot-app'
+    ports:
+      - '8080:8080'
+    depends_on:
+      - postgresql
+    networks:
+      - sba
+
+  postgresql:
+    image: postgres:10-alpine
+    container_name: 'postgresql'
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: demouser
+      POSTGRES_PASSWORD: DemoPa$$$$
+      POSTGRES_DB: demodb
+    networks:
+      - sba
+
+  front:
+    build: ./front
+    image: 'node-app'
+    container_name: 'node-app'
+    ports:
+      - '8081:8081'
+    depends_on:
+      - back
+    networks:
+      - sba
+
+networks:
+  sba:
