@@ -41,8 +41,6 @@ WORKDIR /home/basic-microservices
 
 COPY --from=builder /home/basic-microservices/spring-boot-app/target/spring-boot-app-1.0-SNAPSHOT.jar .
 
-#COPY --from=clone /home/basic-microservices/spring-boot-app/src/main/resources/application.yml .
-
 COPY application.yml .
 
 #Start app with custom config file application.yaml
